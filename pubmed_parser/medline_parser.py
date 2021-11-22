@@ -482,7 +482,6 @@ def parse_article_ncts(pubmed_article):
         print(data_bank_name)
         if data_bank_name and data_bank_name.text == "ClinicalTrials.gov":
             print(data_bank_name)
-            print(
             NCTs = [node.text for node in data_bank.findall('AccessionNumberList/AccessionNumber')]
             return NCTs
     return []
