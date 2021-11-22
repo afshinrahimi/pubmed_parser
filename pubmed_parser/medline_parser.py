@@ -480,7 +480,7 @@ def parse_article_ncts(article):
     data_banks = article.findall("DataBankList/DataBank")
     for data_bank in data_banks:
         data_bank_name = data_bank.find('DataBankName')
-        if data_bank_name and data_bank_name.text.strip() == "ClinicalTrials.gov":
+        if data_bank_name != None and data_bank_name.text and data_bank_name.text.strip() == "ClinicalTrials.gov":
             NCTs = [node.text.strip() for node in data_bank.findall('AccessionNumberList/AccessionNumber')]
             return NCTs
     return []
