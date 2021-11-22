@@ -479,17 +479,14 @@ def parse_article_ncts(pubmed_article):
     data_banks = pubmed_article.findall("DataBankList/DataBank")
     for data_bank in data_banks:
         data_bank_name = data_bank.find('DataBankName')
+        print(data_bank_name)
         if data_bank_name and data_bank_name.text == "ClinicalTrials.gov":
+            print(data_bank_name)
+            print(
             NCTs = [node.text for node in data_bank.findall('AccessionNumberList/AccessionNumber')]
             return NCTs
     return []
                                        
-    if data_bank is not None and data_bank.text=="ClinicalTrials.gov":
-        NCT_trial_numbers = data_bank.findall("AccessionNumberList/AccessionNumber")
-        NCTs = [trial.text for trial in NCT_trial_numbers]
-    else:
-        NCTs = []
-    return NCTs
 
 def parse_article_info(
     pubmed_article, year_info_only, nlm_category, author_list, reference_list
