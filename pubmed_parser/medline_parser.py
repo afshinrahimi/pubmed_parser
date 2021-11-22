@@ -478,7 +478,7 @@ def parse_references(pubmed_article, reference_list):
 def parse_article_ncts(pubmed_article):
     data_bank = pubmed_article.find("DataBankList/DataBank/DataBankName")
     if data_bank is not None and data_bank.text=="ClinicalTrials.gov":
-        NCT_trial_numbers = data_bank.findall("DataBankList/DataBank/AccessionNumberList/AccessionNumber")
+        NCT_trial_numbers = data_bank.findall("AccessionNumberList/AccessionNumber")
         NCTs = [trial.text for trial in NCT_trial_numbers]
     else:
         NCTs = []
