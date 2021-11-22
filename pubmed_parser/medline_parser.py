@@ -478,12 +478,11 @@ def parse_references(pubmed_article, reference_list):
 
 def parse_article_ncts(article):
     data_banks = article.findall("DataBankList/DataBank")
-    print(data_banks)
     for data_bank in data_banks:
         data_bank_name = data_bank.find('DataBankName')
-        print(data_bank_name)
+        print(data_bank_name.text)
         if data_bank_name and data_bank_name.text == "ClinicalTrials.gov":
-            print(data_bank_name)
+            print(data_bank_name.text)
             NCTs = [node.text for node in data_bank.findall('AccessionNumberList/AccessionNumber')]
             return NCTs
     return []
