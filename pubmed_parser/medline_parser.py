@@ -476,8 +476,8 @@ def parse_references(pubmed_article, reference_list):
         )
         return references
 
-def parse_article_ncts(medline):
-    data_banks = pubmed_article.findall("DataBankList/DataBank")
+def parse_article_ncts(article):
+    data_banks = article.findall("DataBankList/DataBank")
     print(data_banks)
     for data_bank in data_banks:
         data_bank_name = data_bank.find('DataBankName')
