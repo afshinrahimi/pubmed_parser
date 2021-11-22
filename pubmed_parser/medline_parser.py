@@ -475,7 +475,14 @@ def parse_references(pubmed_article, reference_list):
             [ref["pmid"] for ref in references if ref["pmid"] != ""]
         )
         return references
-
+def parse_article_ncts(pubmed_article):
+    data_bank = pubmed_article.find("DataBankList/DataBank/DataBankName")
+    if data_bank is not None and data_bank.text=="ClinicalTrials.gov":
+        NCT_trial_numbers = data_bank.findall("DataBankList/DataBank/AccessionNumberList/AccessionNumber")
+        NCTs = [trial.text for trial in NCT_trial_numbers]
+    else:
+        NCTs = []
+    return NCTs
 
 def parse_article_info(
     pubmed_article, year_info_only, nlm_category, author_list, reference_list
@@ -585,6 +592,7 @@ def parse_article_info(
     keywords = parse_keywords(medline)
     other_id_dict = parse_other_id(medline)
     journal_info_dict = parse_journal_info(medline)
+    NCTs = parse_article_ncts(pubmed_article)
     dict_out = {
         "title": title,
         "issue": issue,
@@ -600,6 +608,7 @@ def parse_article_info(
         "keywords": keywords,
         "doi": doi,
         "references": references,
+        "NCTs":NCTs,
         "delete": False,
     }
     if not author_list:
