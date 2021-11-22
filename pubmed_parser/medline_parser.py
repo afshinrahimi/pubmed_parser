@@ -475,7 +475,8 @@ def parse_references(pubmed_article, reference_list):
             [ref["pmid"] for ref in references if ref["pmid"] != ""]
         )
         return references
-def parse_article_ncts(pubmed_article):
+
+def parse_article_ncts(medline):
     data_banks = pubmed_article.findall("DataBankList/DataBank")
     print(data_banks)
     for data_bank in data_banks:
@@ -596,7 +597,7 @@ def parse_article_info(
     keywords = parse_keywords(medline)
     other_id_dict = parse_other_id(medline)
     journal_info_dict = parse_journal_info(medline)
-    NCTs = parse_article_ncts(pubmed_article)
+    NCTs = parse_article_ncts(article)
     dict_out = {
         "title": title,
         "issue": issue,
