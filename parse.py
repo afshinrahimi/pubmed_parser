@@ -11,7 +11,7 @@ def process_pubmed_file(filename):
                                  author_list=False,
                                  reference_list=False)
                                  
-	articles_with_nct = [d for d in dicts_out if d['NCTs']]
+	articles_with_nct = [d for d in dicts_out if 'NCTs' in d and d['NCTs']]
 	output_file = filename.split('.')[-3].split('/')[-1] + '.json'
 	output_file = os.path.join(output_dir, output_file)
 	with open(output_file, 'w') as fp:
